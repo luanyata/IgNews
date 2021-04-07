@@ -18,5 +18,18 @@
   </a>
 </p>
 
+<h2 align="center">🚧 Em Desenvolvimento 🚧</h2>
 
-<h2 align="center">🚧 Em Desenvolvimento 🚧<h2>
+## Stripe:
+
+---
+
+### **_Instalar Stripe-CLI:_**
+
+Instalar de acordo com o SO: https://stripe.com/docs/stripe-cli
+
+### **Rodar Stripe localmente:**
+
+```sh
+stripe listen --forward-to localhost:3000/api/webhooks
+```
