@@ -1,6 +1,5 @@
 import SignInButton from '../SingInButton'
 import styles from './styles.module.scss'
-import React from 'react'
 import ActiveLink  from '../ActiveLink'
 
 
