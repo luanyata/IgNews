@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next"
+import { Session } from "next-auth";
 import { getSession } from "next-auth/client"
 import Head from "next/head";
 import { RichText } from "prismic-dom";
@@ -14,26 +15,42 @@ interface PostProps {
   }
 }
 
+interface SessionProps extends Session{
+  activeSubscription: {}| null
+}
+
 export default function Post({ post }: PostProps) {
   return (
-   <>
-   <Head>
-     <title>{post.title} | Ignews</title>
-   </Head>
-   <main className={styles.container}>
-     <article className={styles.post}>
-       <h1>{post.title}</h1>
-       <time>{post.updatedAt}</time>
-       <div className={styles.postContent} dangerouslySetInnerHTML={{__html: post.content  }}/>
-     </article>
-   </main>
-   </>
+    <>
+      <Head>
+        <title>{post.title} | Ignews</title>
+      </Head>
+      <main className={styles.container}>
+        <article className={styles.post}>
+          <h1>{post.title}</h1>
+          <time>{post.updatedAt}</time>
+          <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.content }} />
+        </article>
+      </main>
+    </>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const session = await getSession({ req });
+  const session = await getSession({ req }) as SessionProps;
   const { slug } = params;
+
+  console.warn(session);
+
+
+  if (!session.activeSubscription) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
 
   const prismic = getPrismicClient(req)
 
