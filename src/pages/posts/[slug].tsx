@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   console.warn(session);
 
 
-  if (!session.activeSubscription) {
+  if (!session?.activeSubscription) {
     return {
       redirect: {
         destination: '/',
