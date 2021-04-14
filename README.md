@@ -18,7 +18,20 @@
   </a>
 </p>
 
-<h2 align="center">🚧 Em Desenvolvimento 🚧</h2>
+## Sobre:
+
+Plataforma para publicação de conteúdo pago
+
+## Tecnologias:
+
+- React
+- Typescript
+- Next
+- Stripe
+- FaunaDB
+- Github Authentication
+- Prismic
+- Axios
 
 ## Stripe:
 
@@ -28,7 +41,7 @@
 
 Instalar de acordo com o SO: https://stripe.com/docs/stripe-cli
 
-### **Rodar Stripe localmente:**
+### **Rodar Stripe Interceptopr Webhook localmente:**
 
 ```sh
 stripe listen --forward-to localhost:3000/api/webhooks
