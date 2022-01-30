@@ -18,16 +18,14 @@ interface PostPreviewProps {
   };
 }
 
-interface SessionProps extends Session {
-  activeSubscription: {} | null;
-}
+
 
 export default function PostPreview({ post }: PostPreviewProps) {
   const [session] = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if ((session as SessionProps)?.activeSubscription) {
+    if (session?.accessToken) {
       router.push(`/posts/${post.slug}`);
     }
   }, [session]);

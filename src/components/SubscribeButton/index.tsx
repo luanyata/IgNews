@@ -1,19 +1,13 @@
-import { Session } from 'next-auth'
 import { signIn, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { api } from '../../services/axios'
 import { getStripeJs } from '../../services/stripejs'
 import styles from './styles.module.scss'
+// interface SessionProps extends Session {
+//   activeSubscription: {} | null
+// }
 
-interface SubscribeProps {
-  priceId: string
-}
-
-interface SessionProps extends Session {
-  activeSubscription: {} | null
-}
-
-const SubscribeButton = ({ priceId }: SubscribeProps) => {
+const SubscribeButton = () => {
   const [session] = useSession()
   const router = useRouter()
 
@@ -23,7 +17,8 @@ const SubscribeButton = ({ priceId }: SubscribeProps) => {
       return
     }
 
-    if ((session as SessionProps).activeSubscription) {
+    //@ts-ignore
+    if (session.accessToken) {
       router.push('/posts')
       return
     }
@@ -47,7 +42,7 @@ const SubscribeButton = ({ priceId }: SubscribeProps) => {
       type="button"
       className={styles.subscribeButton}
       onClick={handleSubcribe}>
-      Subscriber now
+      Subscribe now
     </button>
   )
 }
